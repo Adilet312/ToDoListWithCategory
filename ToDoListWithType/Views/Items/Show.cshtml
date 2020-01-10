@@ -8,9 +8,16 @@
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     </head>
     <body>
-<h1>Find the Item by ID!</h1>
+        <h1>To Do List Item Details: </h1>
 
-@Model.toString()   
-<p><a href="/">Back to places Home.</a></p>
+    <h2>@Model["item"].getDescription()</h2>
+    <h3>Category: @Model["category"].getName()</h3>
+
+    <a href='/categories/@Model["category"].Id/items/new'>Add another item</a>
+    <a href='/categories'>View all categories</a>
+    @* <h1>Find the Item by ID!</h1>
+
+    @Model.toString()   
+    <p><a href="/">Back to places Home.</a></p> *@
 </body>
 </html>

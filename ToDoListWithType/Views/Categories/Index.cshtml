@@ -13,20 +13,20 @@
   <p>There are no items in the list.</p>
 }
 <ul>
-    @foreach (Category item in Model )
+    @foreach (Category category in Model )
     {
       
-        <li> @item.toString()</li>
+        <h3><a href="/categories/@category.Id" >@category.getName()</a></h3>
     }
   
 </ul>
-<a href="/categories/new">Add a new item.</a>
+<a href="/categories/new">Add a new Category.</a>
 <form action="/categories/delete" method="post">
-  <button type="submit" class="btn btn-info" name="button">Clear All Items</button>
+  <button type="submit" class="btn btn-info" name="button">Clear All Categories</button>
 </form>
-<form action="/categories/find" method="get">
-  <label for="findId">Find Category by ID</label>
-  <input id="findId" name="findId" type="number">
+<form action="/categories/{id}" method="get">
+  <label for="categoryId">Find Category by ID</label>
+  <input id="categoryId" name="id" type="number">
   <button type="submit" class="btn btn-info" >FindCategory</button>
 </form>
 @* <a href="/toDoListPath/new">Add a new item.</a> *@

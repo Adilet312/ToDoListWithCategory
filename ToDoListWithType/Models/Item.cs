@@ -4,7 +4,7 @@ namespace ToDoListWithType.Models
     public class Item
     {
         private string description;
-        private int Id;
+        public int Id;
         private static List<Item> list = new List<Item>{};
 
         public Item()
@@ -43,10 +43,10 @@ namespace ToDoListWithType.Models
             return "Item description is "+this.description;
         }
 
-        public int getId()
-        {
-            return Id;
-        }
+        // public int getId()
+        // {
+        //     return Id;
+        // }
 
         public static Item Find(int searchId)
         {

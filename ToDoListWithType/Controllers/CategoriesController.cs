@@ -24,8 +24,31 @@ namespace ToDoListWithType.Controllers
     [HttpPost("/categories")]
     public ActionResult Create(string categoryName)
     {
-        Category newCategory = new Category(categoryName);
-        return RedirectToAction("Index");
+      Category newCategory = new Category(categoryName);
+      return RedirectToAction("Index");
+    }
+    [HttpGet("/categories/{id}")]
+    public ActionResult Show(int id)
+    {
+        Dictionary<string, object> model = new Dictionary<string, object>();
+
+        Category selectedCategory = Category.findCategoryById(id);
+        List<Item> categoryItems = selectedCategory.getItems();
+        model.Add("category", selectedCategory);
+        model.Add("items", categoryItems);
+        return View(model);
+    }
+    [HttpPost("/categories/{categoryId}/items")]
+    public ActionResult Create(int categoryId, string description)
+    {
+     Dictionary<string, object> model = new Dictionary<string, object>();
+      Category foundCategory = Category.findCategoryById(categoryId);
+      Item newItem = new Item(description);
+      foundCategory.addItem(newItem);
+      List<Item> categoryItems = foundCategory.getItems();
+      model.Add("items", categoryItems);
+      model.Add("category", foundCategory);
+      return View("Show", model);
     }
 
     [HttpPost("/categories/delete")]
@@ -35,18 +58,7 @@ namespace ToDoListWithType.Controllers
         return View();
       }
 
-    [HttpGet("/categories/find")]
-    public ActionResult Show(int findId)
-    {
-        Dictionary<string, object> model = new Dictionary<string, object>();
-        Category category = new Category();
-
-        Category selectedCategory = category.findCategoryById(findId);
-        List<Item> categoryItems = selectedCategory.getItems();
-        model.Add("category", selectedCategory);
-        model.Add("items", categoryItems);
-        return View(model);
-    }
+  
 
   }
 }

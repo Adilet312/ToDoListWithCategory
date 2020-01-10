@@ -7,7 +7,7 @@ namespace ToDoListWithType.Models
         private List<Item> itemList;    
         private string name;
 
-        private int id;
+        public int Id;
         public Category()
         {
 
@@ -18,7 +18,7 @@ namespace ToDoListWithType.Models
             this.name = name;
             this.itemList = new List<Item>{};
             categoryList.Add(this);
-            this.id = categoryList.Count;
+            Id = categoryList.Count;
         }
 
         public string getName()
@@ -30,16 +30,16 @@ namespace ToDoListWithType.Models
             this.name = new_name;
         }
 
-        public int getId()
-        {
-            return this.id;
-        }
+        // public int getId()
+        // {
+        //     return this.id;
+        // }
         public List<Item> getItems()
         {
             return this.itemList;
         }
 
-        public void setItems(Item new_item)
+        public void addItem(Item new_item)
         {
             this.itemList.Add(new_item);
         }
@@ -53,7 +53,7 @@ namespace ToDoListWithType.Models
             categoryList.Clear();
         }
 
-        public Category findCategoryById(int given_id)
+        public static Category findCategoryById(int given_id)
         {
             return categoryList[given_id-1];
         }
