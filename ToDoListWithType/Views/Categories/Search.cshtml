@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+@using ToDoListWithType.Models;
+@using ToDoListWithType.Controllers;
+<center>
+<h3>Found Category By Id.</h3>
+
+   @* <h4>@Model["category_key"].toString()</h4>
+   <h4>@Model["item_key"].getDescription()</h4> *@
+   @* <h3>@Model["category_key"].toString()</h3> *@
+   <h3>List of items under @Model["category_key"].toString() :</h4>
+   <br>
+   <br>
+   <hr/>
+   @foreach(var item in @Model["item_key"])
+    {
+        <h3>@item.getDescription()</h3>
+    }
+    @* <h3>@Model.toString()</h3> *@
+
+<br>
+<br>
+<br>
+<hr/>
+<p><a href='/categories'>Return to category list</a></p>
+<p><a href='/'>Return to Main Page</a></p>
+</center>

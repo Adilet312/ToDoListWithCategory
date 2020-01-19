@@ -6,16 +6,7 @@ namespace ToDoListWithType.Controllers
 {
     public class ItemsController : Controller
     {
-        //ListItem list = new ListItem();
-
-        // [HttpGet("/items")]
-        // public ActionResult Index()
-        // {
-        //     List<Item> itemList = Item.getAllItems();
-        //     return View(itemList);
-            
-        //     //return View(list.toStirng());
-        // }
+       
         [HttpGet("/categories/{categoryId}/items/new")]
         public ActionResult New(int categoryId)
         {
@@ -24,15 +15,7 @@ namespace ToDoListWithType.Controllers
             return View(category);
         }
 
-        // [HttpPost("/items")]
-        // public ActionResult Index(string description)
-        // {
-        //     Item myitem = new Item(description);
-        //     //list.addItem(item);
-
-        //     return RedirectToAction("Index");
-
-        // }
+        
 
         [HttpPost("/items/delete")]
         public ActionResult DeleteAll()
@@ -52,12 +35,7 @@ namespace ToDoListWithType.Controllers
             model.Add("category", category);
             return View(model);
         }
-        // [HttpGet("/items/find")]
-        // public ActionResult Show(int findId)
-        // {
-        //      Item findItem = Item.Find(findId);
-        //     return View(findItem);
-        // }
+        
 
        
     }

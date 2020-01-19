@@ -57,6 +57,10 @@ namespace ToDoListWithType.Models
         {
             return categoryList[given_id-1];
         }
+        public static int getSizeOfCategories()
+        {
+            return categoryList.Count;
+        }
 
         public string toString()
         {

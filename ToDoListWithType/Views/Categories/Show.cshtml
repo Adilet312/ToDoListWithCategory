@@ -1,23 +1,21 @@
+@{
+  Layout = "_Layout";
+}
 @using ToDoListWithType.Models;
 @using ToDoListWithType.Controllers;
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset='utf-8'>
-        <title>He are all items in this category.</title>
-        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-    </head>
-    <body>
-<h3>Here are all items in this category:!</h3>
+<center>
+<h3>Here are all items in this category.</h3>
 <ol>
     @foreach(var item in @Model["items"])
     {
-        <li><a href='/categories/@Model["category"].Id/items/@item.Id'>@item.getDescription()</a></li>
+        <h3><a href='/categories/@Model["category"].Id/items/@item.Id'>@item.getDescription()</a></h3>
     }
 </ol>
-@* @Model["category"].toString() *@
+<br>
+<br>
+<br>
+<hr/>
 <p><a href='/categories/@Model["category"].Id/items/new'>Add a new item</a></p>
 <p><a href='/categories'>Return to category list</a></p>
 <p><a href='/'>Return to Main Page</a></p>
-</body>
-</html>
+</center>

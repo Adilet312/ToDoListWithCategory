@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset='utf-8'>
-        <title>Create a Custom ToDoList!</title>
-        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-    </head>
-    <body>
-        <h1>Welcome Category Project.</h1>
-
-        @* <a href='/items/new'>Add my item.</a><br>
-        <a href='/items'>See my list of items.</a><br> *@
-         <a href='/categories/new'>Add my Category.</a><br>
-        <a href='/categories'>See my list of categories.</a>
-    </body>
-</html>
+@{
+  Layout = "_Layout";
+}
+@using ToDoListWithType.Models;
+<center>
+ <h1>Welcome Category Project.</h1>
+ <br>
+ <br>
+ <br>
+ <hr/>
+ <br>
+ <p><a href='/categories/new'>Add my Category.</a></p>
+ <p><a href='/categories'>See my list of categories.</a></p>
+</center>
+   

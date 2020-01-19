@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset='utf-8'>
-        <title>Create an Item !</title>
-        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-    </head>
-    <body>
-     <form action="/categories" method="post">
+@{
+  Layout = "_Layout";
+}
+@using ToDoListWithType.Models;
+<center>
+<form action="/categories" method="post">
       <br>
       <label for="cityname">Add a new Category </label>
       <input id="categoryName" name="categoryName" type="text">
       <button type="submit">Submit</button>
-    </form>
-    <p><a href="/">Back home</a></p>
-    <p><a href="/categories">Back to categories.</a></p>
-</body>
-</html>
+</form>
+<p><a href="/">Back home</a></p>
+<p><a href="/categories">Back to categories.</a></p>
+</center>

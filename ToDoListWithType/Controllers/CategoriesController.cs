@@ -57,6 +57,18 @@ namespace ToDoListWithType.Controllers
        Category.deleteAllCategories();
         return View();
       }
+      [HttpGet("/categories/search")]
+      public ActionResult Search(int givenID)
+      {
+        Dictionary<string,object> model = new Dictionary<string, object>();
+        Category foundCategory = Category.findCategoryById(givenID);
+        List<Item> categoryItems = foundCategory.getItems();
+        model.Add("item_key",categoryItems);
+        model.Add("category_key",foundCategory);
+        
+        return View(model);
+      }
+      
 
   
 
