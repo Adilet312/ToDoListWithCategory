@@ -1,74 +1,80 @@
-using System.Collections.Generic;
-using System;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ToDoListWithType.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ToDoListWithType.Controllers
 {
   public class CategoriesController : Controller
   {
 
-    [HttpGet("/categories")]
+   private readonly ToDoListWithTypeContext _dataBase;
+   public CategoriesController(ToDoListWithTypeContext dataBase)
+   {
+     _dataBase = dataBase;
+   }
+    [HttpGet]
+    public ActionResult Create()
+    {
+      return View();
+    }
+    [HttpPost]
+    public ActionResult Create(Category new_category)
+    {
+        _dataBase.Categories.Add(new_category);
+        _dataBase.SaveChanges();
+        return RedirectToAction("Index");
+    }
+    [HttpGet]
     public ActionResult Index()
     {
-      List<Category> allCategories = Category.getAllCategories();
-      return View(allCategories);
+      List<Category> lsitOfCategories = _dataBase.Categories.ToList();
+      return View(lsitOfCategories);
     }
-
-    [HttpGet("/categories/new")]
-    public ActionResult New()
+    [HttpGet]
+    public ActionResult Details(int id)
     {
-        return View();
+      Category CategoryInDetail = _dataBase.Categories.FirstOrDefault(categories => categories.CategoryId==id);
+      CategoryInDetail.Items = _dataBase.Items.Where(rowItems => rowItems.CategoryId==id).ToList();
+      return View(CategoryInDetail);
     }
-
-    [HttpPost("/categories")]
-    public ActionResult Create(string categoryName)
+    [HttpGet]
+    public ActionResult Update(int CategoryID)
     {
-      Category newCategory = new Category(categoryName);
+      Category foundCatgeory = _dataBase.Categories.FirstOrDefault(categories => categories.CategoryId==CategoryID);
+
+      return View(foundCatgeory);
+    }
+    [HttpPost]
+    public ActionResult Update(Category new_category)
+    {
+      _dataBase.Entry(new_category).State = EntityState.Modified;
+      _dataBase.SaveChanges();
       return RedirectToAction("Index");
     }
-    [HttpGet("/categories/{id}")]
-    public ActionResult Show(int id)
+    [HttpGet]
+    public ActionResult Remove(int idForDeleting)
     {
-        Dictionary<string, object> model = new Dictionary<string, object>();
-
-        Category selectedCategory = Category.findCategoryById(id);
-        List<Item> categoryItems = selectedCategory.getItems();
-        model.Add("category", selectedCategory);
-        model.Add("items", categoryItems);
-        return View(model);
+      Category categoryForDeleting = _dataBase.Categories.FirstOrDefault(rows => rows.CategoryId==idForDeleting);
+      return View(categoryForDeleting);
     }
-    [HttpPost("/categories/{categoryId}/items")]
-    public ActionResult Create(int categoryId, string description)
+    [HttpPost,ActionName("Remove")]
+    public ActionResult RemoveConfirmed(int idForDeleting)
     {
-     Dictionary<string, object> model = new Dictionary<string, object>();
-      Category foundCategory = Category.findCategoryById(categoryId);
-      Item newItem = new Item(description);
-      foundCategory.addItem(newItem);
-      List<Item> categoryItems = foundCategory.getItems();
-      model.Add("items", categoryItems);
-      model.Add("category", foundCategory);
-      return View("Show", model);
+      Category removingCategory = _dataBase.Categories.FirstOrDefault(RelationalReferenceOwnershipBuilderExtensions => RelationalReferenceOwnershipBuilderExtensions.CategoryId==idForDeleting);
+      _dataBase.Remove(removingCategory);
+      _dataBase.SaveChanges();
+      return RedirectToAction("Index");
     }
+    
+    
 
-    [HttpPost("/categories/delete")]
-     public ActionResult DeleteAll()
-      {
-       Category.deleteAllCategories();
-        return View();
-      }
-      [HttpGet("/categories/search")]
-      public ActionResult Search(int givenID)
-      {
-        Dictionary<string,object> model = new Dictionary<string, object>();
-        Category foundCategory = Category.findCategoryById(givenID);
-        List<Item> categoryItems = foundCategory.getItems();
-        model.Add("item_key",categoryItems);
-        model.Add("category_key",foundCategory);
-        
-        return View(model);
-      }
-      
+    
+
+
+  
+
 
   
 

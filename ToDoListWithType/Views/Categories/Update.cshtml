@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+@model ToDoListWithType.Models.Category;
+<h4>Update this Category: </h4><br>
+<h3>@Html.DisplayNameFor(model => model.name): @Html.DisplayFor(model => model.name)</h3>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model=>model.CategoryId)
+    @Html.LabelFor(model=>model.name)
+    @Html.TextBoxFor(model=> model.name)
+    <input type ="submit" value="Update" />
+}

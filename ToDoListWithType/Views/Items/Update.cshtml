@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model ToDoListWithType.Models.Item;
+<h4>Update this Item: </h4><br>
+<h3>@Html.DisplayNameFor(model => model.description): @Html.DisplayFor(model => model.description)</h3>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model=>model.ItemId)
+    @Html.LabelFor(model=>model.description)
+    @Html.TextBoxFor(model=> model.description)
+
+    @Html.LabelFor(model=>model.Category)
+    @Html.DropDownList("CategoryId")
+    <input type ="submit" value="Update" />
+}

@@ -1,7 +1,6 @@
 @{
   Layout = "_Layout";
 }
-@using ToDoListWithType.Models;
 <center>
  <h1>Welcome Category Project.</h1>
  <br>
@@ -9,7 +8,11 @@
  <br>
  <hr/>
  <br>
- <p><a href='/categories/new'>Add my Category.</a></p>
- <p><a href='/categories'>See my list of categories.</a></p>
+ <p></p>
+ <p>@Html.ActionLink("See all categories", "Index", "Categories")</p> 
+ <p>@Html.ActionLink("Add a new category", "Create", "Categories")</p> 
+ <p>@Html.ActionLink("Home","Index","Home")</p>
 </center>
    
+
+  

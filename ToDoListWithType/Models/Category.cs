@@ -3,69 +3,13 @@ namespace ToDoListWithType.Models
 {
     public class Category
     {
-        private static List<Category> categoryList = new List<Category>{};
-        private List<Item> itemList;    
-        private string name;
-
-        public int Id;
+        public string name {get;set;}
+        public int CategoryId {get;set;}
+        public virtual ICollection<Item> Items {get;set;}
         public Category()
         {
-
+            this.Items = new HashSet<Item>();
         }
-
-        public Category(string name)
-        {
-            this.name = name;
-            this.itemList = new List<Item>{};
-            categoryList.Add(this);
-            Id = categoryList.Count;
-        }
-
-        public string getName()
-        {
-            return this.name;
-        }
-        public void setName(string new_name)
-        {
-            this.name = new_name;
-        }
-
-        // public int getId()
-        // {
-        //     return this.id;
-        // }
-        public List<Item> getItems()
-        {
-            return this.itemList;
-        }
-
-        public void addItem(Item new_item)
-        {
-            this.itemList.Add(new_item);
-        }
-
-        public static List<Category> getAllCategories()
-        {
-            return categoryList;
-        }
-        public static void deleteAllCategories()
-        {
-            categoryList.Clear();
-        }
-
-        public static Category findCategoryById(int given_id)
-        {
-            return categoryList[given_id-1];
-        }
-        public static int getSizeOfCategories()
-        {
-            return categoryList.Count;
-        }
-
-        public string toString()
-        {
-            string result = "Category name: " + this.name;
-            return result;
-        }
+        
     }
 }

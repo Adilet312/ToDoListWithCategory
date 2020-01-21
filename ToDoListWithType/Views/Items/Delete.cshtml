@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+@model ToDoListWithType.Models.Item
+
+<h2>Are you sure you want to delete this?</h2>
+<h3>@Html.DisplayNameFor(model => model.description): @Html.DisplayFor(model => model.description)</h3>
+@using (Html.BeginForm())
+{
+    
+    <input type="submit" value="Delete" />
+}
+@Html.ActionLink("Back to List", "Index")
